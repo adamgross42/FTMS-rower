@@ -61,9 +61,6 @@ player.controlBar.playToggle.dispose(); //remove completely
 player.controlBar.progressControl.disable(); //show, but disallow user to use it
 player.controlBar.fullscreenToggle.dispose();
 player.controlBar.pictureInPictureToggle.dispose();
-player.controlBar.captionsButton.dispose();
-player.controlBar.chaptersButton.dispose();
-player.controlBar.subtitlesButton.dispose();
 player.controlBar.playbackRateMenuButton.disable();
 
     function handleNotifications(event) {
@@ -73,10 +70,10 @@ player.controlBar.playbackRateMenuButton.disable();
 			document.querySelector('#pace').textContent = data['Instantaneous Pace'];
 			if (data['Instantaneous Pace'] == 0) {
 				//training has not yet started, or training is paused or stopped
-				
+				player.pause();
 			} else {
 				//training has started or training is in progress
-				
+				player.play();
 			}
 		}
 		if (typeof data['Average Pace'] != "undefined") {
