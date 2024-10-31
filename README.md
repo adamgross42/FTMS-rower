@@ -1,21 +1,22 @@
 # FTMS-Rower
 
-Webapp for rowers with FTMS protocol support. Will have soon support for video playback.
+Webapp for rowers with FTMS protocol support.
+Main feature is auto adjusted video playback (based on your rowing performance) to be more motivated and enjoy your workout.
 
 
 ## Note
 
-Currently this is a proof-of concept and progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)
+Currently this is a proof-of concept and any progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)
 
-Contributions welcome :)
+Contributions are very welcome :)
 
 
 ## Usage
 1.) clone the repo into your webserver directory  
-2.) put a video named "video.mp4" into the video-folder  
+2.) put a video named "video.mp4" into the video-folder. Optionally edit the poster in video/posters folder  
 3.) open page in your browser on your android based phone or tablet - see [the list of supported browsers](#supported-browsers)  
 4.) connect your rowing machine with the "connect"-button  
-5.) exercise and enjoy :)  
+5.) exercise and enjoy the video :)  
 
 
 ## Supported browsers
