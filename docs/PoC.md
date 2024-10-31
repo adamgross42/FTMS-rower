@@ -24,11 +24,11 @@ Also quickly downloaded a random rowing video from youtube for that purpose, Som
 I use the latest release of Video.js, version 8.19.1.  
 To include it in the existing project, only a few steps were required: copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
 ```
-	<h2>Rowing video</h2>
-	<video id="rowing_video" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
-		<source src="video/video.mp4" type="video/mp4">
-		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-    </video>
+<h2>Rowing video</h2>
+<video id="rowing_video" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
+	<source src="video/video.mp4" type="video/mp4">
+	<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>
 ```
 So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our training yet. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our trainig data, to figure out if training has startet, paused or stopped.  
 For the first step, I figured out, to trigger play/pause/stop I should use the value for "Instantaneous Pace". It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, to figure out the difference for pause/stop, I will have a closer look later.  
