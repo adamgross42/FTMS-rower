@@ -23,4 +23,6 @@ Also quickly downloaded a random rowing video from youtube for that purpose, Som
 ## Video.js
 I use the latest release of Video.js, version 8.19.1.  
 To include it in the existing project, only a few steps were required:  copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
+So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our trainig. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our trainig data, to figure out if training has startet, paused or stopped.  
+
 Stay tuned for further updates...  
