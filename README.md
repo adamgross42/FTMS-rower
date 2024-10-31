@@ -1,3 +1,5 @@
+CAUTION: THIS IS A HAND-MADE MIRROR - future updates only on https://git.kmpr.at/kamp/FTMS-Rower
+
 # FTMS-Rower
 
 Webapp for rowers with FTMS protocol support.  
