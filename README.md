@@ -1,4 +1,4 @@
-CAUTION: THIS IS A HAND-MADE MIRROR - future updates, contribnutions etc. only on https://git.kmpr.at/kamp/FTMS-Rower
+CAUTION: THIS IS A HAND-MADE MIRROR - future updates, contributions etc. only on https://git.kmpr.at/kamp/FTMS-Rower
 
 # FTMS-Rower
 
