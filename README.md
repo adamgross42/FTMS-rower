@@ -7,8 +7,9 @@ Main feature is auto adjusted video playback (based on your rowing performance) 
 ## Note
 
 Currently this is a proof-of concept and any progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)
+Some solutions or code-parts are not well-tested, there may be no error handling and errors will occur. So bear with me on that.
 
-Contributions are very welcome :)
+Contributions are **very** welcome :)
 
 
 ## Usage
