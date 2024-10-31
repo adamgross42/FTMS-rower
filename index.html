@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/video-js.min.css">
+    <script src="js/video.min.js"></script>
     <script type="text/javascript" src="js/ftms-rower.js"></script>
 </head>
 
@@ -15,6 +17,7 @@
     <h2>Connect</h2>
     <p><button id="bleConnectionButton">Connect FTMS BLE Rower</button></p>
 
+	<h2>Training stats</h2>
     <div class="cards">
         <div class="card">
             <div class="name">Pace</div>
@@ -40,6 +43,12 @@
             <div class="value" id="tot-distance">0</div>
         </div>
     </div>
+	
+	<h2>Rowing video</h2>
+	<video id="rowing_video_1" class="video-js" controls preload="none" width="640" height="264" poster="video/posters/video.png" data-setup="{}">
+		<source src="video/video.mp4" type="video/mp4">
+		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
 
 </body>
 

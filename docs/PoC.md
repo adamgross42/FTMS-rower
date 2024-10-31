@@ -21,4 +21,6 @@ Also quickly downloaded a random rowing video from youtube for that purpose, Som
 
 
 ## Video.js
+I use the latest release of Video.js, version 8.19.1.  
+To include it in the existing project, only a few steps were required:  copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
 Stay tuned for further updates...  
