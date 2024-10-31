@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Concept FTMS Rower Console</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <script type="text/javascript" src="js/ftms-rower.js"></script>
+</head>
+
+<body>
+    <h1>FTMS BLE Rower Display</h1>
+
+    <h2>Connect</h2>
+    <p><button id="bleConnectionButton">Connect FTMS BLE Rower</button></p>
+
+    <div class="cards">
+        <div class="card">
+            <div class="name">Pace</div>
+            <div class="unit" id="avg-pace">0:00</div>
+            <div class="value" id="pace">0:00</div>
+        </div>
+
+        <div class="card">
+            <div class="name">Stroke rate</div>
+            <div class="unit" id="tot-strokes">0</div>
+            <div class="value" id="stroke-rate">0.0</div>
+        </div>
+
+        <div class="card">
+            <div class="name">Power</div>
+            <div class="unit" id="avg-power">0</div>
+            <div class="value" id="power">0.0</div>
+        </div>
+
+        <div class="card">
+            <div class="name">Distance</div>
+            <div class="unit">m</div>
+            <div class="value" id="tot-distance">0</div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    function handleNotifications(event) {
+        let data = parseRowerData(event.target.value);
+
+		if (typeof data['Instantaneous Pace'] != "undefined") {
+			document.querySelector('#pace').textContent = data['Instantaneous Pace'];
+		}
+		if (typeof data['Average Pace'] != "undefined") {
+			document.querySelector('#avg-pace').textContent = data['Average Pace'];
+		}
+		if (typeof data['Stroke Count'] != "undefined") {
+			document.querySelector('#tot-strokes').textContent = data['Stroke Count'];
+		}
+		if (typeof data['Stroke Rate'] != "undefined") {
+			document.querySelector('#stroke-rate').textContent = data['Stroke Rate'];
+		}
+		if (typeof data['Average Power'] != "undefined") {
+			document.querySelector('#avg-power').textContent = data['Average Power'];
+		}
+		if (typeof data['Instantaneous Power'] != "undefined") {
+			document.querySelector('#power').textContent = data['Instantaneous Power'];
+		}
+		if (typeof data['Total Distance'] != "undefined") {
+		    document.querySelector('#tot-distance').textContent = data['Total Distance'];
+		}
+    }
+
+    function what() {
+        connect().then(characteristic =>
+            characteristic.addEventListener('characteristicvaluechanged', handleNotifications)
+        )
+    }
+
+    document.querySelector('#bleConnectionButton').addEventListener('click', what);
+
+
+</script>
+
+</html>
