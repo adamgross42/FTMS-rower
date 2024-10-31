@@ -27,7 +27,7 @@ So we have our training video embedded now, but we have to hit play ourselfes an
 For the first step, I figured out, to trigger play/pause/stop I should use the value for Instantaneous Pace. It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, to figure out the difference for pause/stop, I will have a closer look later.  
 
 Now that we control the video basically via code, we want to turn off (either hide, like the picture-in-picture button) or disable (like the progress bar) user controls for the video playback. This is easily done.  
-´´´
+```
 const player = videojs('rowing_video');
 player.bigPlayButton.hide(); //just don't show it
 player.controlBar.playToggle.dispose(); //remove completely
@@ -38,9 +38,9 @@ player.controlBar.captionsButton.dispose();
 player.controlBar.chaptersButton.dispose();
 player.controlBar.subtitlesButton.dispose();
 player.controlBar.playbackRateMenuButton.disable();
-´´´
+```
 
 But that does not prevent play/pause when I click on the video, so I had to add another piece of code to prevent users from controling the video playback.  
-´´´
-´´´
+```
+```
 Stay tuned for further updates...  
