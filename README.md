@@ -1,12 +1,12 @@
 # FTMS-Rower
 
-Webapp for rowers with FTMS protocol support.
+Webapp for rowers with FTMS protocol support.  
 Main feature is auto adjusted video playback (based on your rowing performance) to be more motivated and enjoy your workout.
 
 
 ## Note
 
-Currently this is a proof-of concept and any progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)
+Currently this is a proof-of concept and any progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)  
 Some solutions or code-parts are not well-tested, there may be no error handling and errors will occur. So bear with me on that.
 
 Contributions are **very** welcome :)
