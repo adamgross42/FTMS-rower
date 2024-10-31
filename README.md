@@ -11,11 +11,12 @@ Contributions welcome :)
 
 
 ## Usage
-1.) clone the repo into your webserver
-2.) put a video named "video.mp4" into the video-folder
-3.) open page in your browser on your android based phone or tablet - see [the list of supported browsers](#supported-browsers)
-4.) connect your rowing machine with the "connect"-button
-5.) exercise and enjoy :)
+1.) clone the repo into your webserver  
+2.) put a video named "video.mp4" into the video-folder  
+3.) open page in your browser on your android based phone or tablet - see [the list of supported browsers](#supported-browsers)  
+4.) connect your rowing machine with the "connect"-button  
+5.) exercise and enjoy :)  
+
 
 ## Supported browsers
 Use Google Chrome on Android, Windows 10, Mac (M1 or Intel) and Ubuntu, but not iOS.
