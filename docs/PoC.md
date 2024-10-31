@@ -12,7 +12,7 @@ The next step was to search github for everything related to FTMS and rowing mac
 ## The first steps
 Ok, so I found a minimalistic starting point, in Alex' repo and cloned it and tried it out. But it did not work, the training stats were not displayed. After a quick debug, I found out that my rowing machine sends two responses, while the second one seems to be invalid (have to check that later, maybe those two need to be combined?). So I quickly adjusted the code, to filter that out.
 Tada - it is working :)
-![picture]()
+![picture](https://git.kmpr.at/kamp/FTMS-Rower/raw/commit/31d3722901d83f19e72cb33a61ee68664689b391/docs/concept-1.png)
 
 Now I need to put a video player into the page, found video.js for that, where the playback speed can be controlled. Without further assessment, I want to use it and see what I can do with it.
 Also quickly downloaded a random rowing video from youtube for that purpose, Someone rowing in my home country on the lake "Grundlsee".

@@ -11,7 +11,7 @@ Contributions welcome :)
 
 
 ## Usage
-1.) clone the repo into your webserver  
+1.) clone the repo into your webserver directory  
 2.) put a video named "video.mp4" into the video-folder  
 3.) open page in your browser on your android based phone or tablet - see [the list of supported browsers](#supported-browsers)  
 4.) connect your rowing machine with the "connect"-button  
