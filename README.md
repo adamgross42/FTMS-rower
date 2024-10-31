@@ -5,7 +5,7 @@ Webapp for rowers with FTMS protocol support. Will have soon support for video p
 
 ## Note
 
-Currently this is a proof-of concept and progress will be documented here: 
+Currently this is a proof-of concept and progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)
 
 Contributions welcome :)
 
