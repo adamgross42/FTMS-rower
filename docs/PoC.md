@@ -2,11 +2,11 @@
 
 ## The goal
 I have a rowing machine and found about the app "Kinomap". I liked the concept of watching videos of boats rowing in the water while rowing. But I had that before with watching this videos on youtube. The main feature which stood out from the app is, that the video playback speed gets adjusted based on your workout performance. The culprit of the app is, that the company wants to sell you a high priced (personal opinion) abonnement for using the app. So I want to create my own app which does the same. I do not need a fancy interface or community features or challenges or whatever.  
-So the goal is, to create a solution, which can connect to my rowing machine and can adjust playback speed of videos.
+So the goal of this "thing" is, to create a solution, which can connect to my rowing machine and can adjust playback speed of videos.
 
 
 ## The research
-First I asked my friends on #selfhosted:matrix.org if they know of an already existing solution, before reinventing the wheel. It seems that noone was aware of any kind of software this niche.  
+First I asked my friends on [#selfhosted:matrix.org](https://matrix.to/#/#selfhosted:matrix.org) if they know of an already existing solution, before reinventing the wheel. It seems that noone was aware of any kind of software this niche.  
 So then I looked more into, what it needs to connect any device to my rower, and read training data from it. I found out, that it is called FTMS, which stands for FiTness Machine Service protocoll and is widely used by many training device manufacturer and seems to be industry standard.  
 The next step was to search github for everything related to FTMS and rowing machines. I found quite a lot, which surprised me. Also I found an interesting repo from Alex Tomberg, which seems as a good starting point for me. The basic functionality to connect to my rowing machine and reading basic data seems to be implemented.  
 
@@ -22,9 +22,16 @@ Also quickly downloaded a random rowing video from youtube for that purpose, Som
 
 ## Video.js
 I use the latest release of Video.js, version 8.19.1.  
-To include it in the existing project, only a few steps were required:  copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
-So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our trainig. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our trainig data, to figure out if training has startet, paused or stopped.  
-For the first step, I figured out, to trigger play/pause/stop I should use the value for Instantaneous Pace. It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, to figure out the difference for pause/stop, I will have a closer look later.  
+To include it in the existing project, only a few steps were required: copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
+```
+	<h2>Rowing video</h2>
+	<video id="rowing_video" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
+		<source src="video/video.mp4" type="video/mp4">
+		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+```
+So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our training yet. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our trainig data, to figure out if training has startet, paused or stopped.  
+For the first step, I figured out, to trigger play/pause/stop I should use the value for "Instantaneous Pace". It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, to figure out the difference for pause/stop, I will have a closer look later.  
 
 Now that we control the video basically via code, we want to turn off (either hide, like the picture-in-picture button) or disable (like the progress bar) user controls for the video playback. This is easily done.  
 ```
