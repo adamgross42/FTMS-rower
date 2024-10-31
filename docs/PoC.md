@@ -24,5 +24,23 @@ Also quickly downloaded a random rowing video from youtube for that purpose, Som
 I use the latest release of Video.js, version 8.19.1.  
 To include it in the existing project, only a few steps were required:  copy the video.min.js and video.min.css into the project folders and include some code in the index.html file.  
 So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our trainig. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our trainig data, to figure out if training has startet, paused or stopped.  
+For the first step, I figured out, to trigger play/pause/stop I should use the value for Instantaneous Pace. It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, to figure out the difference for pause/stop, I will have a closer look later.  
 
+Now that we control the video basically via code, we want to turn off (either hide, like the picture-in-picture button) or disable (like the progress bar) user controls for the video playback. This is easily done.  
+´´´
+const player = videojs('rowing_video');
+player.bigPlayButton.hide(); //just don't show it
+player.controlBar.playToggle.dispose(); //remove completely
+player.controlBar.progressControl.disable(); //show, but disallow user to use it
+player.controlBar.fullscreenToggle.dispose();
+player.controlBar.pictureInPictureToggle.dispose();
+player.controlBar.captionsButton.dispose();
+player.controlBar.chaptersButton.dispose();
+player.controlBar.subtitlesButton.dispose();
+player.controlBar.playbackRateMenuButton.disable();
+´´´
+
+But that does not prevent play/pause when I click on the video, so I had to add another piece of code to prevent users from controling the video playback.  
+´´´
+´´´
 Stay tuned for further updates...  

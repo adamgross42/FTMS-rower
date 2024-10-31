@@ -45,7 +45,7 @@
     </div>
 	
 	<h2>Rowing video</h2>
-	<video id="rowing_video_1" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
+	<video id="rowing_video" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
 		<source src="video/video.mp4" type="video/mp4">
 		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </video>
@@ -54,11 +54,30 @@
 
 <script>
 
+//hide player controls in video.js
+const player = videojs('rowing_video');
+player.bigPlayButton.hide(); //just don't show it
+player.controlBar.playToggle.dispose(); //remove completely
+player.controlBar.progressControl.disable(); //show, but disallow user to use it
+player.controlBar.fullscreenToggle.dispose();
+player.controlBar.pictureInPictureToggle.dispose();
+player.controlBar.captionsButton.dispose();
+player.controlBar.chaptersButton.dispose();
+player.controlBar.subtitlesButton.dispose();
+player.controlBar.playbackRateMenuButton.disable();
+
     function handleNotifications(event) {
         let data = parseRowerData(event.target.value);
 
 		if (typeof data['Instantaneous Pace'] != "undefined") {
 			document.querySelector('#pace').textContent = data['Instantaneous Pace'];
+			if (data['Instantaneous Pace'] == 0) {
+				//training has not yet started, or training is paused or stopped
+				
+			} else {
+				//training has started or training is in progress
+				
+			}
 		}
 		if (typeof data['Average Pace'] != "undefined") {
 			document.querySelector('#avg-pace').textContent = data['Average Pace'];
