@@ -32,7 +32,18 @@ To include it in the existing project, only a few steps were required: copy the 
 ```
 So we have our training video embedded now, but we have to hit play ourselfes and it does not adjust its playback speed according to our training yet. So first, let's find out if we can start/pause/stop the video with our exercise. To do that, first I have to find out how to control the video.js from code. Then I have to find something in our training data, to figure out if training has startet, paused or stopped.  
 For the first step, I figured out, to trigger play/pause/stop I should use the value for "Instantaneous Pace". It is 0 before training has started, is also 0 when paused and 0 too when training has stopped. So a good starting point, but to figure out the difference for pause/stop, I will need to have a closer look later.  
-
+```
+if (typeof data['Instantaneous Pace'] != "undefined") {
+	document.querySelector('#pace').textContent = data['Instantaneous Pace'];
+	if (data['Instantaneous Pace'] == 0) {
+		//training has not yet started, or training is paused or stopped
+		player.pause();
+	} else {
+		//training has started or training is in progress
+		player.play();
+	}
+}
+```
 Now that we control the video basically via code, we want to turn off (either hide, like the picture-in-picture button) or disable (like the progress bar) user controls for the video playback. This is easily done by adding this to the javascript code in our index.html.  
 ```
 const player = videojs('rowing_video');
