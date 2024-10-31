@@ -38,6 +38,10 @@ On Chrome, Edge and Opera for Linux you might need to turn on the experimental p
 - Opera: `opera://flags/#enable-experimental-web-platform-features`
 
 
+## Demo
+Use this link for a quick [DEMO](https://www.kmpr.at/ftms/index.html)
+
+
 ## About FTMS
 The FTMS (FiTness Machine Service) protocol allows you to interact with many different fitness machines
 regardless of the brand. 
