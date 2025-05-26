@@ -8,12 +8,16 @@
     justify-self: end;
 }
 
+.cumulative_value {
+    font-size: 25pt;
+    justify-self: end;
+}
+
 .value {
-    font-size: 50pt;
+    font-size: 30pt;
     justify-self: center;
     grid-column: 1 / -1;
 }
-
 
 .cards {
     display: grid;

@@ -12,6 +12,8 @@ function connect() {
         }]
     })
         .then(device => {
+            // Human-readable name of the device.
+            console.log('Device name: ' + device.name);
             console.log('Connecting to GATT Server...');
             return device.gatt.connect();
         })
@@ -25,7 +27,7 @@ function connect() {
         })
         .then(characteristic => {
             characteristic.startNotifications().then(_ => {
-                console.log('> Notifications started');
+                console.log('Notifications started...');
             });
             return characteristic;
         })
@@ -46,7 +48,7 @@ function parseRowerData(value) {
     for (let i = 0; i < value.byteLength; i++) {
         a.push('0x' + ('00' + value.getUint8(i).toString(16)).slice(-2));
     }
-    console.log('> ' + a.join(' '));
+    console.debug('Rower data: ' + a.join(' '));
 
     var flags = value.getUint16(0, littleEndian = true);
     let byteIndex = 2;

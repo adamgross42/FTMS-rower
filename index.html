@@ -2,98 +2,141 @@
 <html>
 
 <head>
-    <title>FTMS Rower | Concept</title>
+    <title>FTMS Rower</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/video-js.min.css">
-    <script src="js/video.min.js"></script>
     <script type="text/javascript" src="js/ftms-rower.js"></script>
 </head>
 
 <body>
-    <h1>FTMS Rower | Concept</h1>
+    <h1>FTMS Rower</h1>
 
-    <h2>Connect rower</h2>
-    <p><button id="bleConnectionButton">Connect FTMS BLE Rower</button></p>
+    <button id="bleConnectionButton">Connect FTMS Rower</button>
+    <button id="exportTCXButton">Export TCX Data</button>
 
-	<h2>Training stats</h2>
+    <h2>Training stats</h2>
     <div class="cards">
         <div class="card">
             <div class="name">Pace</div>
-            <div class="unit" id="avg-pace">0:00</div>
-            <div class="value" id="pace">0:00</div>
+            <div class="cumulative_value" id="avg-pace"></div>
+            <div class="unit">seconds/500m</div>
+            <div class="value" id="pace"></div>
+            <div class="unit">seconds/500m</div>
         </div>
 
         <div class="card">
             <div class="name">Stroke rate</div>
-            <div class="unit" id="tot-strokes">0</div>
-            <div class="value" id="stroke-rate">0.0</div>
+            <div class="cumulative_value" id="stroke-count"></div>
+            <div class="unit">strokes</div>
+            <div class="value" id="stroke-rate"></div>
+            <div class="unit">stroke/min</div>
         </div>
 
         <div class="card">
             <div class="name">Power</div>
-            <div class="unit" id="avg-power">0</div>
-            <div class="value" id="power">0.0</div>
+            <div class="cumulative_value" id="avg-power"></div>
+            <div class="unit">W</div>
+            <div class="value" id="power"></div>
+            <div class="unit">W</div>
+        </div>
+
+        <div class="card">
+            <div class="name">Energy</div>
+            <div class="cumulative_value" id="tot-energy"></div>
+            <div class="unit">kcal</div>
+            <div class="value" id="energy"></div>
+            <div class="unit">kcal/h</div>
         </div>
 
         <div class="card">
             <div class="name">Distance</div>
+            <div class="cumulative_value">m</div>
+            <div class="value" id="tot-distance"></div>
             <div class="unit">m</div>
-            <div class="value" id="tot-distance">0</div>
+        </div>
+
+        <div class="card">
+            <div class="name">Resistance Level</div>
+            <div class="cumulative_value"></div>
+            <div class="value" id="resistance"></div>
+        </div>
+
+        <div class="card">
+            <div class="name">Time</div>
+            <div class="value" id="elapsed-time"></div>
+            <div class="unit">seconds elapsed</div>
+            <div class="value" id="remaining-time"></div>
+            <div class="unit">seconds remaining</div>
         </div>
     </div>
-	
-	<h2>Rowing video</h2>
-	<video id="rowing_video" class="video-js" controls preload="none" width="640" height="480" poster="video/posters/video.png" data-setup="{}">
-		<source src="video/video.mp4" type="video/mp4">
-		<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-    </video>
 
 </body>
 
 <script>
 
-//hide player controls in video.js
-const player = videojs('rowing_video');
-player.bigPlayButton.hide(); //just don't show it
-player.controlBar.playToggle.dispose(); //remove completely
-player.controlBar.progressControl.disable(); //show, but disallow user to use it
-player.controlBar.fullscreenToggle.dispose();
-player.controlBar.pictureInPictureToggle.dispose();
-player.controlBar.playbackRateMenuButton.disable();
+    let historicalData = {};
+
+    function formatPace(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+
+        let timeString = '';
+
+        if (hours > 0) {
+            timeString += `${hours}:`;
+        }
+
+        if (minutes > 0 || hours > 0) {
+            timeString += `${minutes}:`;
+        }
+
+        timeString += `${remainingSeconds}`;
+
+        return timeString.trim();
+    }
 
     function handleNotifications(event) {
         let data = parseRowerData(event.target.value);
+        historicalData[new Date().toISOString()] = data;
 
-		if (typeof data['Instantaneous Pace'] != "undefined") {
-			document.querySelector('#pace').textContent = data['Instantaneous Pace'];
-			if (data['Instantaneous Pace'] == 0) {
-				//training has not yet started, or training is paused or stopped
-				player.pause();
-			} else {
-				//training has started or training is in progress
-				player.play();
-			}
-		}
-		if (typeof data['Average Pace'] != "undefined") {
-			document.querySelector('#avg-pace').textContent = data['Average Pace'];
-		}
-		if (typeof data['Stroke Count'] != "undefined") {
-			document.querySelector('#tot-strokes').textContent = data['Stroke Count'];
-		}
-		if (typeof data['Stroke Rate'] != "undefined") {
-			document.querySelector('#stroke-rate').textContent = data['Stroke Rate'];
-		}
-		if (typeof data['Average Power'] != "undefined") {
-			document.querySelector('#avg-power').textContent = data['Average Power'];
-		}
-		if (typeof data['Instantaneous Power'] != "undefined") {
-			document.querySelector('#power').textContent = data['Instantaneous Power'];
-		}
-		if (typeof data['Total Distance'] != "undefined") {
-		    document.querySelector('#tot-distance').textContent = data['Total Distance'];
-		}
+        if (typeof data['Instantaneous Pace'] != "undefined") {
+            document.querySelector('#pace').textContent = formatPace(data['Instantaneous Pace']) + "//" + data['Instantaneous Pace'];
+        }
+        if (typeof data['Average Pace'] != "undefined") {
+            document.querySelector('#avg-pace').textContent = "Avg. " + formatPace(data['Average Pace']);
+        }
+        if (typeof data['Stroke Count'] != "undefined") {
+            document.querySelector('#stroke-count').textContent = "∑ " + data['Stroke Count'];
+        }
+        if (typeof data['Stroke Rate'] != "undefined") {
+            document.querySelector('#stroke-rate').textContent = data['Stroke Rate'];
+        }
+        if (typeof data['Average Power'] != "undefined") {
+            document.querySelector('#avg-power').textContent = "Ø " + data['Average Power'];
+        }
+        if (typeof data['Instantaneous Power'] != "undefined") {
+            document.querySelector('#power').textContent = data['Instantaneous Power'];
+        }
+        if (typeof data['Total Distance'] != "undefined") {
+            document.querySelector('#tot-distance').textContent = data['Total Distance'];
+        }
+        if (typeof data['Total Energy'] != "undefined") {
+            document.querySelector('#tot-energy').textContent = data['Total Energy'];
+        }
+        if (typeof data['Energy Per Hour'] != "undefined") {
+            document.querySelector('#energy').textContent = data['Energy Per Hour'];
+        }
+        if (typeof data['Resistance Level'] != "undefined") {
+            document.querySelector('#resistance').textContent = data['Resistance Level'];
+        }
+        if (typeof data['Elapsed Time'] != "undefined") {
+            document.querySelector('#elapsed-time').textContent = data['Elapsed Time'];
+        }
+        if (typeof data['Remaining Time'] != "undefined") {
+            document.querySelector('#remaining-time').textContent = data['Remaining Time'];
+        }
     }
 
     function what() {
@@ -103,7 +146,57 @@ player.controlBar.playbackRateMenuButton.disable();
     }
 
     document.querySelector('#bleConnectionButton').addEventListener('click', what);
-	
+
+    function exportTCX() {
+        const data = `<?xml version="1.0" encoding="UTF-8"?>
+    <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
+        <Activities>
+        <Activity Sport="Other">
+            <Id>${new Date().toISOString()}</Id>
+            <Lap StartTime="${new Date(window.performance.timing.navigationStart).toISOString()}">
+                <TotalTimeSeconds>0</TotalTimeSeconds>
+                <DistanceMeters>0</DistanceMeters>
+                <MaximumSpeed>0</MaximumSpeed>
+                <Calories>0</Calories>
+                <Intensity>Active</Intensity>
+                <TriggerMethod>Manual</TriggerMethod>
+                <Track>` +
+            Object.entries(historicalData).map(([time, data]) => {
+                return `<Trackpoint>
+                            <Time>${time}</Time>
+                            <DistanceMeters>${data['Total Distance'] || 0}</DistanceMeters>
+                            <Extensions>
+                                <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                                    <Watts>${data['Instantaneous Power'] || 0}</Watts>
+                                </TPX>
+                            </Extensions>
+                        </Trackpoint>`;
+            }).join('') +
+            `</Track>
+                <Extensions>
+                    <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                        <AvgSpeed>0</AvgSpeed>
+                        <AvgWatts>0</AvgWatts>
+                        <MaxWatts>0</MaxWatts>
+                    </TPX>
+                </Extensions>
+            </Lap>
+            <Notes>Rower</Notes>
+        </Activity>
+        </Activities>
+    </TrainingCenterDatabase>`;
+
+        const blob = new Blob([data], { type: 'application/vnd.garmin.tcx+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rower_data.tcx';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    document.querySelector('#exportTCXButton').addEventListener('click', exportTCX);
+
 </script>
 
 </html>

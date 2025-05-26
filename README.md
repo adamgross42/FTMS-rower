@@ -1,31 +1,16 @@
-CAUTION: THIS IS A HAND-MADE MIRROR - future updates, contributions etc. only on https://git.kmpr.at/kamp/FTMS-Rower
-
 # FTMS-Rower
 
-Webapp for rowers with FTMS protocol support.  
-Main feature is auto adjusted video playback (based on your rowing performance) to be more motivated and enjoy your workout.
+Web app for rowers with Bluetooth FTMS protocol support.  Displays live data from the rower and allows for exporting the data to a [TCX file](https://en.wikipedia.org/wiki/Training_Center_XML).
 
-
-## Note
-
-Currently this is a proof-of concept and any progress will be documented here: [PoC](https://git.kmpr.at/kamp/FTMS-Rower/src/branch/main/docs/PoC.md)  
-Some solutions or code-parts are not well-tested, there may be no error handling and errors will occur. So bear with me on that.
+The web app can be accessed [via GitHub Pages here](https://adamgross42.github.io/FTMS-rower).  Or clone the repo and host it on your own web server.
 
 Contributions are **very** welcome :)
 
 
-## Usage
-1.) clone the repo into your webserver directory  
-2.) put a video named "video.mp4" into the video-folder. Optionally edit the poster in video/posters folder  
-3.) open page in your browser on your android based phone or tablet - see [the list of supported browsers](#supported-browsers)  
-4.) connect your rowing machine with the "connect"-button  
-5.) exercise and enjoy the video :)  
-
-
 ## Supported browsers
-Use Google Chrome on Android, Windows 10, Mac (M1 or Intel) and Ubuntu, but not iOS.
+Use Google Chrome on Android, Windows 10/11, Mac (M1 or Intel) and Ubuntu, but not iOS.
 
-The Webapp is running directly in the browser and relies on some of the latest web technologies. Browsers like Firefox and Safari don't have support for them. On iOS Safari is the only allowed browser, and even Chrome for iOS is just Safari with a Chrome skin. Browser support for the web version is the following:
+The web app is running directly in the browser and relies on some of the latest web technologies. Browsers like Firefox and Safari don't have support for them. On iOS, Safari is the only allowed browser, and even Chrome for iOS is just Safari with a Chrome skin. Browser support for the web version is the following:
 
 | Chrome | Edge | Opera | Chrome Android | Samsung Internet | Firefox | Safari | Safari iOS | Chrome iOS |
 |--------|------|-------|----------------|------------------|---------|--------|------------|------------|
@@ -42,18 +27,21 @@ On Chrome, Edge and Opera for Linux you might need to turn on the experimental p
 - Opera: `opera://flags/#enable-experimental-web-platform-features`
 
 
-## Demo
-Use this link for a quick [DEMO](https://www.kmpr.at/ftms/index.html)
+## Project History
+
+This was originally forked from a stale mirror https://github.com/manuelkamp/FTMS-rower with manual additions from the live app at https://www.kmpr.at/ftms/index.html.  That original project focuses on displaying a video while rowing, this fork focuses on collecting, displaying, and exporting the rowing data.
 
 
 ## About FTMS
-The FTMS (FiTness Machine Service) protocol allows you to interact with many different fitness machines
-regardless of the brand. 
+The FTMS (FiTness Machine Service) protocol allows you to interact with many different fitness machines regardless of the brand.
 It is a Bluetooth Low Energy (BLE) protocol that follows a [standard defined by Bluetooth Sig](https://www.bluetooth.com/specifications/specs/fitness-machine-service-1-0/).
 
-You can read more about FTMS in this [blogpost](https://medium.com/decathlondigital/take-control-of-your-fitness-machines-6588439aeeda)
+You can read more about FTMS in this [blog post](https://medium.com/decathlondigital/take-control-of-your-fitness-machines-6588439aeeda).
 
 
-## Bluetooth resources to FTMS
-- [List of characteristic UUIDs](https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/uuids/characteristic_uuids.yaml)
-- [Rower data characteristic documentation](https://bitbucket.org/bluetooth-SIG/public/src/main/gss/org.bluetooth.characteristic.rower_data.yaml)
+## Resources
+- [List of Bluetooth characteristic UUIDs](https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/uuids/characteristic_uuids.yaml)
+- [FTMS rower data characteristic documentation](https://bitbucket.org/bluetooth-SIG/public/src/main/gss/org.bluetooth.characteristic.rower_data.yaml)
+- [TCX TrainingCenterDatabase XML Schema Definition](https://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd)
+- [TCX ActivityExtension XML Schema Definition](https://www8.garmin.com/xmlschemas/ActivityExtensionv2.xsd)
+- [XML Validator](https://www.liquid-technologies.com/online-xsd-validator)
