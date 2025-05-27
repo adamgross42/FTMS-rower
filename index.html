@@ -148,11 +148,13 @@
     document.querySelector('#bleConnectionButton').addEventListener('click', what);
 
     function exportTCX() {
+        let dataId = new Date().toISOString();
+
         const data = `<?xml version="1.0" encoding="UTF-8"?>
     <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
         <Activities>
         <Activity Sport="Other">
-            <Id>${new Date().toISOString()}</Id>
+            <Id>${dataId}</Id>
             <Lap StartTime="${new Date(window.performance.timing.navigationStart).toISOString()}">
                 <TotalTimeSeconds>0</TotalTimeSeconds>
                 <DistanceMeters>0</DistanceMeters>
@@ -190,7 +192,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'rower_data.tcx';
+        a.download = `rower_data_${dataId.replaceAll(':', '-').slice(0, 19)}.tcx`;
         a.click();
         URL.revokeObjectURL(url);
     }
