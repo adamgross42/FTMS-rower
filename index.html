@@ -12,8 +12,10 @@
 <body>
     <h1>FTMS Rower</h1>
 
-    <button id="bleConnectionButton">Connect FTMS Rower</button>
-    <button id="exportTCXButton">Export TCX Data</button>
+    <div class="button-row">
+        <button id="bleConnectionButton">Connect FTMS Rower</button>
+        <button id="exportTCXButton">Export TCX Data</button>
+    </div>
 
     <h2>Training stats</h2>
     <div class="cards">
@@ -51,7 +53,8 @@
 
         <div class="card">
             <div class="name">Distance</div>
-            <div class="cumulative_value">m</div>
+            <div class="cumulative_value"></div>
+            <div class="unit">m</div>
             <div class="value" id="tot-distance"></div>
             <div class="unit">m</div>
         </div>
