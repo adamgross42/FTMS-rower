@@ -32,7 +32,7 @@ function connect() {
             return characteristic;
         })
         .catch(error => {
-            console.log('Argh! ' + error);
+            return Promise.reject(error);
         });
 }
 
