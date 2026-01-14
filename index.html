@@ -148,7 +148,22 @@
         )
     }
 
+    let wakeLock = null;
+
+    async function requestWakeLock() {
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log('Wake Lock active!');
+            wakeLock.addEventListener('release', () => {
+                console.log('Wake Lock released.');
+            });
+        } catch (err) {
+            console.error(`${err.name}, ${err.message}`);
+        }
+    }
+
     document.querySelector('#bleConnectionButton').addEventListener('click', what);
+    document.querySelector('#bleConnectionButton').addEventListener('click', requestWakeLock);
 
     function exportTCX() {
         let dataId = new Date().toISOString();
@@ -198,6 +213,10 @@
         a.download = `rower_data_${dataId.replaceAll(':', '-').slice(0, 19)}.tcx`;
         a.click();
         URL.revokeObjectURL(url);
+
+        wakeLock.release().then(() => {
+            wakeLock = null;
+        });
     }
 
     document.querySelector('#exportTCXButton').addEventListener('click', exportTCX);
