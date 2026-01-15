@@ -145,7 +145,7 @@
     function what() {
         connect().then(
             characteristic =>
-                resolve(characteristic.addEventListener('characteristicvaluechanged', handleNotifications)),
+                characteristic.addEventListener('characteristicvaluechanged', handleNotifications),
             error => console.error('Argh! ' + error)
         )
     }
